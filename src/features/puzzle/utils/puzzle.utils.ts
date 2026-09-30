@@ -11,8 +11,7 @@ import type {
 
 const EMPTY_CELL: Cell = { kind: 'empty' };
 
-/** Row-major board with tiles 1..n-1 in order and the empty cell at the bottom-right. */
-export function createSolvedBoard(gridSize: number): Board {
+function createSolvedBoard(gridSize: number): Board {
   const cellCount = gridSize * gridSize;
 
   return Array.from({ length: cellCount }, (_, index): Cell =>
@@ -24,7 +23,6 @@ export function getGridPosition(index: CellIndex, gridSize: number): GridPositio
   return { row: Math.floor(index / gridSize), col: index % gridSize };
 }
 
-/** The cell index where a tile belongs when the puzzle is solved. */
 export function getSolvedIndex(tileId: TileId): CellIndex {
   return tileId - 1;
 }
@@ -50,8 +48,7 @@ export function areCellsAdjacent(a: CellIndex, b: CellIndex, gridSize: number): 
   return Math.abs(first.row - second.row) + Math.abs(first.col - second.col) === 1;
 }
 
-/** Indices of the cells sharing an edge with `index`. */
-export function getNeighborIndices(index: CellIndex, gridSize: number): ReadonlyArray<CellIndex> {
+function getNeighborIndices(index: CellIndex, gridSize: number): ReadonlyArray<CellIndex> {
   const { row, col } = getGridPosition(index, gridSize);
   const neighbors: CellIndex[] = [];
 
@@ -63,16 +60,6 @@ export function getNeighborIndices(index: CellIndex, gridSize: number): Readonly
   return neighbors;
 }
 
-export function canMoveTile(board: Board, index: CellIndex, gridSize: number): boolean {
-  const cell = board[index];
-
-  return cell?.kind === 'tile' && areCellsAdjacent(index, findEmptyIndex(board), gridSize);
-}
-
-/**
- * Slides the tile at `index` into the empty cell. Returns a new board, or
- * `null` when the move is illegal. The input board is never mutated.
- */
 export function moveTile(board: Board, index: CellIndex, gridSize: number): Board | null {
   const tile = board[index];
   const emptyIndex = findEmptyIndex(board);
@@ -88,7 +75,6 @@ export function moveTile(board: Board, index: CellIndex, gridSize: number): Boar
   });
 }
 
-/** Direction a tile at `from` slides to reach the adjacent cell `to`. */
 export function getMoveDirection(from: CellIndex, to: CellIndex, gridSize: number): MoveDirection {
   const start = getGridPosition(from, gridSize);
   const end = getGridPosition(to, gridSize);
@@ -98,12 +84,7 @@ export function getMoveDirection(from: CellIndex, to: CellIndex, gridSize: numbe
   return end.col < start.col ? 'left' : 'right';
 }
 
-/**
- * Background position that shows the picture fragment belonging to
- * `solvedIndex`. It depends only on where a piece belongs in the solved
- * picture, never on where the piece currently sits. Use it together with a
- * background size of `gridSize * 100%` in both directions.
- */
+/** Pair with a background size of `gridSize * 100%` in both directions. */
 export function getImageOffset(solvedIndex: CellIndex, gridSize: number): ImageOffset {
   const { row, col } = getGridPosition(solvedIndex, gridSize);
   const lastLine = gridSize - 1;
@@ -135,13 +116,8 @@ function pickRandom<T>(items: ReadonlyArray<T>, random: RandomSource): T {
 }
 
 /**
- * Creates a shuffled board by walking the empty cell through random legal
- * moves, starting from the solved board. Every step is a legal move, so the
- * result is always solvable. The walk avoids undoing the previous step when
- * another move exists, and keeps going until the board is not solved.
- *
- * This does not produce a uniform distribution over solvable boards and does
- * not guarantee any particular difficulty.
+ * Walks the empty cell through random legal moves from the solved board, so the
+ * result is always solvable. The distribution is not uniform over solvable boards.
  */
 export function createShuffledBoard(
   gridSize: number,

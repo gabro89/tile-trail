@@ -46,6 +46,7 @@ Then open the URL that Vite prints (usually <http://localhost:5173>).
 | `npm run format`       | Format all files with Prettier.                                      |
 | `npm run format:check` | Check formatting without writing changes.                            |
 | `npm run typecheck`    | Run the TypeScript compiler without emitting files.                  |
+| `npm run knip`         | Find unused files, exports, and dependencies with Knip.              |
 
 ## Tech stack
 
@@ -56,6 +57,7 @@ Then open the URL that Vite prints (usually <http://localhost:5173>).
 - ESLint flat config with `typescript-eslint`, `eslint-plugin-react-hooks`, and
   `eslint-config-prettier`
 - Prettier
+- Knip for unused files, exports, and dependencies
 
 TypeScript is pinned to `~6.0.x` because `typescript-eslint` does not yet support TypeScript 7.
 
@@ -158,6 +160,7 @@ Unit tests are intentionally omitted from this first version. The project is che
 - `npm run lint`
 - `npm run format:check`
 - `npm run typecheck`
+- `npm run knip`
 - `npm run build`
 - Manual browser checks: movement rules, move counting, Restart, New game, completion reveal,
   keyboard use, and narrow mobile layouts.

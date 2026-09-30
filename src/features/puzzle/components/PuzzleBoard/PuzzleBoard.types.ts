@@ -6,7 +6,6 @@ export interface PuzzleBoardProps {
   readonly board: Board;
   readonly gridSize: number;
   readonly image: PuzzleImage;
-  /** When solved, every tile is locked and the full picture is shown. */
   readonly isSolved: boolean;
   readonly onTileSelect: (index: CellIndex) => void;
 }

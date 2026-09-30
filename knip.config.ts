@@ -1,0 +1,7 @@
+import type { KnipConfig } from 'knip';
+
+const config: KnipConfig = {
+  treatConfigHintsAsErrors: true,
+};
+
+export default config;

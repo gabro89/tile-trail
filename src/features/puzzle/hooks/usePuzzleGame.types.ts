@@ -6,11 +6,6 @@ export interface UsePuzzleGameOptions {
 }
 
 export interface PuzzleGameState {
-  /**
-   * The shuffled board the current game started from, used by Restart.
-   * Boards are immutable values (every move creates a new array), so this
-   * snapshot can never be changed by later moves.
-   */
   readonly initialBoard: Board;
   readonly board: Board;
   readonly moveCount: number;
