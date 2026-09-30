@@ -12,3 +12,17 @@
   background: $color-board-bg;
   box-shadow: $shadow-md;
 }
+
+// Close the gaps and hide numbers so the finished picture reads as one image.
+.puzzle-board--solved {
+  gap: 0;
+
+  .puzzle-tile {
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .puzzle-tile__number {
+    display: none;
+  }
+}

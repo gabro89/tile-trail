@@ -1,0 +1,25 @@
+@use 'tokens' as *;
+
+.puzzle-controls {
+  display: flex;
+  gap: $space-3;
+  justify-content: center;
+}
+
+.puzzle-controls__button {
+  flex: 1 1 0;
+  max-width: 10rem;
+  min-height: 2.75rem;
+  padding: $space-2 $space-4;
+  border: 2px solid $color-primary;
+  border-radius: $radius-md;
+  background: $color-primary;
+  color: $color-primary-contrast;
+  font-weight: $font-weight-semibold;
+  cursor: pointer;
+}
+
+.puzzle-controls__button--secondary {
+  background: $color-surface;
+  color: $color-primary;
+}

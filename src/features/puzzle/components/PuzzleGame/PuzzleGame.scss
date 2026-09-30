@@ -5,3 +5,12 @@
   flex-direction: column;
   gap: $space-4;
 }
+
+.puzzle-game__panel {
+  display: flex;
+  align-items: center;
+  gap: $space-4;
+  width: 100%;
+  max-width: $board-max-size;
+  margin-inline: auto;
+}

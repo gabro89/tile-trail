@@ -1,0 +1,24 @@
+@use 'tokens' as *;
+
+.puzzle-preview {
+  flex: 0 0 auto;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-1;
+}
+
+.puzzle-preview__image {
+  display: block;
+  width: $preview-size;
+  height: $preview-size;
+  object-fit: cover;
+  border-radius: $radius-sm;
+  box-shadow: $shadow-sm;
+}
+
+.puzzle-preview__caption {
+  color: $color-text-muted;
+  font-size: $font-size-sm;
+}

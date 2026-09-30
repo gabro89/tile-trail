@@ -10,6 +10,8 @@ interface PuzzleTileProps {
   readonly image: PuzzleImage;
   /** Where the tile would slide, or `null` when it cannot move. */
   readonly moveDirection: MoveDirection | null;
+  /** Shows the empty cell's missing picture fragment once the puzzle is solved. */
+  readonly isRevealed: boolean;
   readonly onSelect: (index: CellIndex) => void;
 }
 
@@ -33,10 +35,22 @@ export function PuzzleTile({
   gridSize,
   image,
   moveDirection,
+  isRevealed,
   onSelect,
 }: PuzzleTileProps) {
   if (cell.kind === 'empty') {
-    return <div className="puzzle-tile puzzle-tile--empty" aria-hidden="true" />;
+    // The empty cell always belongs at the bottom-right of the solved picture.
+    const solvedIndex = gridSize * gridSize - 1;
+
+    return isRevealed ? (
+      <div
+        className="puzzle-tile puzzle-tile--revealed"
+        style={getPieceStyle(image, solvedIndex, gridSize)}
+        aria-hidden="true"
+      />
+    ) : (
+      <div className="puzzle-tile puzzle-tile--empty" aria-hidden="true" />
+    );
   }
 
   const { row, col } = getGridPosition(index, gridSize);

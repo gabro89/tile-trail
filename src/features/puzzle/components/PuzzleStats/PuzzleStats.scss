@@ -1,0 +1,30 @@
+@use 'tokens' as *;
+
+.puzzle-stats {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.puzzle-stats__moves {
+  color: $color-text-muted;
+  font-weight: $font-weight-semibold;
+}
+
+.puzzle-stats__count {
+  color: $color-text;
+  font-size: $font-size-lg;
+  font-variant-numeric: tabular-nums;
+}
+
+.puzzle-stats__message:empty {
+  display: none;
+}
+
+.puzzle-stats__message {
+  padding: $space-2 $space-3;
+  border-radius: $radius-sm;
+  background: $color-success-bg;
+  color: $color-success;
+  font-weight: $font-weight-semibold;
+}

@@ -7,16 +7,18 @@ interface PuzzleBoardProps {
   readonly board: Board;
   readonly gridSize: number;
   readonly image: PuzzleImage;
+  /** When solved, every tile is locked and the full picture is shown. */
+  readonly isSolved: boolean;
   readonly onTileSelect: (index: CellIndex) => void;
 }
 
-export function PuzzleBoard({ board, gridSize, image, onTileSelect }: PuzzleBoardProps) {
+export function PuzzleBoard({ board, gridSize, image, isSolved, onTileSelect }: PuzzleBoardProps) {
   const emptyIndex = findEmptyIndex(board);
   const tracks = `repeat(${gridSize}, minmax(0, 1fr))`;
 
   return (
     <div
-      className="puzzle-board"
+      className={`puzzle-board${isSolved ? ' puzzle-board--solved' : ''}`}
       role="group"
       aria-label={`Puzzle board, ${gridSize} by ${gridSize}`}
       style={{ gridTemplateColumns: tracks, gridTemplateRows: tracks }}
@@ -29,10 +31,11 @@ export function PuzzleBoard({ board, gridSize, image, onTileSelect }: PuzzleBoar
           gridSize={gridSize}
           image={image}
           moveDirection={
-            areCellsAdjacent(index, emptyIndex, gridSize)
+            !isSolved && areCellsAdjacent(index, emptyIndex, gridSize)
               ? getMoveDirection(index, emptyIndex, gridSize)
               : null
           }
+          isRevealed={isSolved}
           onSelect={onTileSelect}
         />
       ))}
