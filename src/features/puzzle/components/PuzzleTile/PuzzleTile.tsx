@@ -1,19 +1,8 @@
 import type { CSSProperties } from 'react';
-import type { Cell, CellIndex, MoveDirection, PuzzleImage } from '../../models/puzzle.types.ts';
+import type { CellIndex, PuzzleImage } from '../../models/puzzle.types.ts';
 import { getGridPosition, getImageOffset, getSolvedIndex } from '../../utils/puzzle.utils.ts';
+import type { PuzzleTileProps } from './PuzzleTile.types.ts';
 import './PuzzleTile.scss';
-
-interface PuzzleTileProps {
-  readonly cell: Cell;
-  readonly index: CellIndex;
-  readonly gridSize: number;
-  readonly image: PuzzleImage;
-  /** Where the tile would slide, or `null` when it cannot move. */
-  readonly moveDirection: MoveDirection | null;
-  /** Shows the empty cell's missing picture fragment once the puzzle is solved. */
-  readonly isRevealed: boolean;
-  readonly onSelect: (index: CellIndex) => void;
-}
 
 function getPieceStyle(
   image: PuzzleImage,

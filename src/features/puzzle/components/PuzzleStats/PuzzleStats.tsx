@@ -1,10 +1,5 @@
-import type { GameStatus } from '../../models/puzzle.types.ts';
+import type { PuzzleStatsProps } from './PuzzleStats.types.ts';
 import './PuzzleStats.scss';
-
-interface PuzzleStatsProps {
-  readonly moveCount: number;
-  readonly status: GameStatus;
-}
 
 function formatMoves(count: number): string {
   return `${count} ${count === 1 ? 'move' : 'moves'}`;

@@ -1,9 +1,5 @@
-import type { PuzzleImage } from '../../models/puzzle.types.ts';
+import type { PuzzlePreviewProps } from './PuzzlePreview.types.ts';
 import './PuzzlePreview.scss';
-
-interface PuzzlePreviewProps {
-  readonly image: PuzzleImage;
-}
 
 export function PuzzlePreview({ image }: PuzzlePreviewProps) {
   return (

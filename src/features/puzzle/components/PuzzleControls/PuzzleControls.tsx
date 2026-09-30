@@ -1,11 +1,5 @@
-import type { Ref } from 'react';
+import type { PuzzleControlsProps } from './PuzzleControls.types.ts';
 import './PuzzleControls.scss';
-
-interface PuzzleControlsProps {
-  readonly newGameButtonRef: Ref<HTMLButtonElement>;
-  readonly onNewGame: () => void;
-  readonly onRestart: () => void;
-}
 
 export function PuzzleControls({ newGameButtonRef, onNewGame, onRestart }: PuzzleControlsProps) {
   return (

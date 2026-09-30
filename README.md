@@ -82,6 +82,7 @@ tile-trail/
           PuzzlePreview/         Small preview of the complete picture
         hooks/
           usePuzzleGame.ts       Game state and actions (move, restart, new game)
+          usePuzzleGame.types.ts Hook options, state, and result types
         models/
           puzzle.types.ts        Domain types (tiles, board, status, config)
         utils/
@@ -94,8 +95,13 @@ tile-trail/
     main.tsx
 ```
 
+Each component folder holds the component (`PuzzleBoard.tsx`), its props interface
+(`PuzzleBoard.types.ts`), and its styles (`PuzzleBoard.scss`).
+
 ### Architecture notes
 
+- **Where types live.** Shared domain types are in `models/puzzle.types.ts`. Types used by only one
+  component or hook sit next to it in a `*.types.ts` file.
 - **Pure logic.** `puzzle.utils.ts` creates solved boards, checks adjacency, applies moves
   immutably (an illegal move returns `null`), detects completion, and shuffles. It does not import
   React or the image.

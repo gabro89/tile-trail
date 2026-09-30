@@ -1,18 +1,7 @@
-import type { Ref } from 'react';
-import type { Board, CellIndex, PuzzleImage } from '../../models/puzzle.types.ts';
 import { areCellsAdjacent, findEmptyIndex, getMoveDirection } from '../../utils/puzzle.utils.ts';
 import { PuzzleTile } from '../PuzzleTile/PuzzleTile.tsx';
+import type { PuzzleBoardProps } from './PuzzleBoard.types.ts';
 import './PuzzleBoard.scss';
-
-interface PuzzleBoardProps {
-  readonly ref: Ref<HTMLDivElement>;
-  readonly board: Board;
-  readonly gridSize: number;
-  readonly image: PuzzleImage;
-  /** When solved, every tile is locked and the full picture is shown. */
-  readonly isSolved: boolean;
-  readonly onTileSelect: (index: CellIndex) => void;
-}
 
 export function PuzzleBoard({
   ref,
@@ -33,22 +22,22 @@ export function PuzzleBoard({
       aria-label={`Puzzle board, ${gridSize} by ${gridSize}`}
       style={{ gridTemplateColumns: tracks, gridTemplateRows: tracks }}
     >
-      {board.map((cell, index) => (
-        <PuzzleTile
-          key={cell.kind === 'tile' ? `tile-${cell.id}` : 'empty'}
-          cell={cell}
-          index={index}
-          gridSize={gridSize}
-          image={image}
-          moveDirection={
-            !isSolved && areCellsAdjacent(index, emptyIndex, gridSize)
-              ? getMoveDirection(index, emptyIndex, gridSize)
-              : null
-          }
-          isRevealed={isSolved}
-          onSelect={onTileSelect}
-        />
-      ))}
+      {board.map((cell, index) => {
+        const canMove = !isSolved && areCellsAdjacent(index, emptyIndex, gridSize);
+
+        return (
+          <PuzzleTile
+            key={cell.kind === 'tile' ? `tile-${cell.id}` : 'empty'}
+            cell={cell}
+            index={index}
+            gridSize={gridSize}
+            image={image}
+            moveDirection={canMove ? getMoveDirection(index, emptyIndex, gridSize) : null}
+            isRevealed={isSolved}
+            onSelect={onTileSelect}
+          />
+        );
+      })}
     </div>
   );
 }
