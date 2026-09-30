@@ -4,6 +4,8 @@ TileTrail is a small browser-based sliding picture puzzle. A square picture is c
 15 picture tiles and one empty cell. Slide tiles into the empty cell until the picture is whole
 again.
 
+Live demo: <https://gabro89.github.io/tile-trail/>
+
 ## Features
 
 - Classic 4×4 sliding puzzle. The solved layout is row-major, with the empty cell at the
@@ -47,6 +49,19 @@ Then open the URL that Vite prints (usually <http://localhost:5173>).
 | `npm run format:check` | Check formatting without writing changes.                            |
 | `npm run typecheck`    | Run the TypeScript compiler without emitting files.                  |
 | `npm run knip`         | Find unused files, exports, and dependencies with Knip.              |
+
+## Deployment
+
+Every push to `main` runs [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml). It runs
+the lint, format, and Knip checks, builds the app, and publishes `dist/` to GitHub Pages. The
+workflow can also be started by hand from the **Actions** tab.
+
+GitHub Pages serves the app from `/tile-trail/`, so the workflow passes that path to Vite with
+`--base`. Local development and `npm run build` keep the default `/` base. Runtime asset URLs use
+`import.meta.env.BASE_URL`, so they work under both.
+
+One-time setup: in the repository settings, open **Pages** and set **Source** to **GitHub
+Actions**.
 
 ## Tech stack
 
