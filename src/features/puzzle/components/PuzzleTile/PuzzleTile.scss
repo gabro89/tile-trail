@@ -1,0 +1,45 @@
+@use 'tokens' as *;
+
+.puzzle-tile {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: $radius-sm;
+  background-color: $color-surface-muted;
+  background-repeat: no-repeat;
+  box-shadow: $shadow-sm;
+  cursor: default;
+
+  &:disabled {
+    // Non-movable tiles keep their full picture; disabled only blocks input.
+    opacity: 1;
+  }
+}
+
+.puzzle-tile--movable {
+  cursor: pointer;
+}
+
+.puzzle-tile--empty {
+  background: $color-empty-cell;
+  box-shadow: none;
+}
+
+.puzzle-tile__number {
+  position: absolute;
+  top: $space-1;
+  left: $space-1;
+  min-width: 1.4em;
+  padding: 0 $space-1;
+  border-radius: $radius-sm;
+  background: rgb(0 0 0 / 55%);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: $font-weight-semibold;
+  line-height: 1.4;
+  text-align: center;
+}

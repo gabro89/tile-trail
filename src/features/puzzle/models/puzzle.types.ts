@@ -30,6 +30,21 @@ export interface GridPosition {
   readonly col: number;
 }
 
+/** Direction a tile slides when it moves into the empty cell. */
+export type MoveDirection = 'up' | 'down' | 'left' | 'right';
+
+/** Background offsets, in percent, that show one fragment of the picture. */
+export interface ImageOffset {
+  readonly x: number;
+  readonly y: number;
+}
+
+/** The picture the puzzle is cut from. It must be square. */
+export interface PuzzleImage {
+  readonly src: string;
+  readonly alt: string;
+}
+
 /** Returns a number in the range [0, 1), like `Math.random`. */
 export type RandomSource = () => number;
 
@@ -38,4 +53,5 @@ export interface PuzzleConfig {
   readonly gridSize: number;
   /** Number of random legal moves used to shuffle a solved board. */
   readonly shuffleMoveCount: number;
+  readonly image: PuzzleImage;
 }

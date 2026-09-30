@@ -3,6 +3,8 @@ import type {
   Cell,
   CellIndex,
   GridPosition,
+  ImageOffset,
+  MoveDirection,
   RandomSource,
   TileId,
 } from '../models/puzzle.types.ts';
@@ -84,6 +86,32 @@ export function moveTile(board: Board, index: CellIndex, gridSize: number): Boar
     if (cellIndex === emptyIndex) return tile;
     return cell;
   });
+}
+
+/** Direction a tile at `from` slides to reach the adjacent cell `to`. */
+export function getMoveDirection(from: CellIndex, to: CellIndex, gridSize: number): MoveDirection {
+  const start = getGridPosition(from, gridSize);
+  const end = getGridPosition(to, gridSize);
+
+  if (end.row < start.row) return 'up';
+  if (end.row > start.row) return 'down';
+  return end.col < start.col ? 'left' : 'right';
+}
+
+/**
+ * Background position that shows the picture fragment belonging to
+ * `solvedIndex`. It depends only on where a piece belongs in the solved
+ * picture, never on where the piece currently sits. Use it together with a
+ * background size of `gridSize * 100%` in both directions.
+ */
+export function getImageOffset(solvedIndex: CellIndex, gridSize: number): ImageOffset {
+  const { row, col } = getGridPosition(solvedIndex, gridSize);
+  const lastLine = gridSize - 1;
+
+  return {
+    x: lastLine === 0 ? 0 : (col / lastLine) * 100,
+    y: lastLine === 0 ? 0 : (row / lastLine) * 100,
+  };
 }
 
 export function isSolved(board: Board): boolean {

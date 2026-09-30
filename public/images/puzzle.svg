@@ -1,0 +1,160 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1b2a5c"/>
+      <stop offset="0.45" stop-color="#6a4c93"/>
+      <stop offset="0.8" stop-color="#f28f5c"/>
+      <stop offset="1" stop-color="#ffd07a"/>
+    </linearGradient>
+    <linearGradient id="lake" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3a86b4"/>
+      <stop offset="1" stop-color="#153e63"/>
+    </linearGradient>
+    <radialGradient id="sunGlow">
+      <stop offset="0.55" stop-color="#ffe29a" stop-opacity="0.8"/>
+      <stop offset="1" stop-color="#ffe29a" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Sky -->
+  <rect width="400" height="260" fill="url(#sky)"/>
+
+  <!-- Stars (top-left) -->
+  <g fill="#fff8e1">
+    <circle cx="22" cy="20" r="2.2"/>
+    <circle cx="58" cy="42" r="1.6"/>
+    <circle cx="84" cy="16" r="2.6"/>
+    <circle cx="36" cy="70" r="1.8"/>
+    <circle cx="74" cy="84" r="1.4"/>
+    <circle cx="14" cy="96" r="1.6"/>
+    <path d="M52 58 l3 7 7 3 -7 3 -3 7 -3 -7 -7 -3 7 -3z"/>
+  </g>
+
+  <!-- Clouds -->
+  <g fill="#ffffff" opacity="0.9">
+    <ellipse cx="150" cy="52" rx="34" ry="14"/>
+    <ellipse cx="136" cy="44" rx="18" ry="14"/>
+    <ellipse cx="162" cy="40" rx="20" ry="16"/>
+    <ellipse cx="128" cy="138" rx="22" ry="8"/>
+    <ellipse cx="140" cy="132" rx="14" ry="9"/>
+  </g>
+
+  <!-- Sun -->
+  <circle cx="335" cy="68" r="62" fill="url(#sunGlow)"/>
+  <circle cx="335" cy="68" r="34" fill="#ffc93c"/>
+  <g stroke="#ffc93c" stroke-width="4" stroke-linecap="round">
+    <line x1="335" y1="14" x2="335" y2="2"/>
+    <line x1="389" y1="68" x2="398" y2="68"/>
+    <line x1="373" y1="30" x2="382" y2="21"/>
+    <line x1="297" y1="30" x2="288" y2="21"/>
+    <line x1="373" y1="106" x2="382" y2="115"/>
+  </g>
+
+  <!-- Hot air balloon -->
+  <g transform="translate(245 70)">
+    <path d="M0 -44 C28 -44 38 -18 30 4 C24 20 10 30 6 40 L-6 40 C-10 30 -24 20 -30 4 C-38 -18 -28 -44 0 -44Z" fill="#e63946"/>
+    <path d="M0 -44 C12 -44 16 -18 13 4 C11 20 6 30 4 40 L-4 40 C-6 30 -11 20 -13 4 C-16 -18 -12 -44 0 -44Z" fill="#f4d35e"/>
+    <line x1="-6" y1="40" x2="-6" y2="52" stroke="#5c3d2e" stroke-width="1.5"/>
+    <line x1="6" y1="40" x2="6" y2="52" stroke="#5c3d2e" stroke-width="1.5"/>
+    <rect x="-8" y="52" width="16" height="11" rx="2" fill="#8b5a2b"/>
+  </g>
+
+  <!-- Birds -->
+  <g fill="none" stroke="#2b2d42" stroke-width="2.5" stroke-linecap="round">
+    <path d="M200 150 q7 -7 14 0 q7 -7 14 0"/>
+    <path d="M232 172 q5 -5 10 0 q5 -5 10 0"/>
+    <path d="M188 180 q5 -5 10 0 q5 -5 10 0"/>
+  </g>
+
+  <!-- Back mountains -->
+  <polygon points="0,215 62,118 112,172 172,96 238,190 300,138 400,212 400,270 0,270" fill="#4a3f7a"/>
+  <polygon points="62,118 46,143 56,139 63,148 72,138 80,142" fill="#f1f1f7"/>
+  <polygon points="172,96 152,125 163,120 172,130 182,119 194,126" fill="#f1f1f7"/>
+  <polygon points="300,138 286,156 296,153 302,160 310,152 318,156" fill="#f1f1f7"/>
+  <polygon points="300,138 400,212 400,270 330,270" fill="#3a3166" opacity="0.6"/>
+
+  <!-- Hills -->
+  <path d="M0 250 Q100 205 200 246 T400 232 L400 340 L0 340Z" fill="#63b36b"/>
+  <path d="M0 292 Q130 250 250 292 T400 282 L400 340 L0 340Z" fill="#3f8a55"/>
+
+  <!-- Orange field with rows (right) -->
+  <path d="M300 262 Q350 248 400 256 L400 312 Q350 300 300 312Z" fill="#f4a259"/>
+  <g stroke="#d9772b" stroke-width="3">
+    <line x1="306" y1="272" x2="398" y2="264"/>
+    <line x1="304" y1="284" x2="398" y2="278"/>
+    <line x1="302" y1="296" x2="398" y2="292"/>
+  </g>
+
+  <!-- House -->
+  <g transform="translate(30 228)">
+    <rect x="4" y="22" width="56" height="40" fill="#f1e3c2"/>
+    <polygon points="-2,24 32,-4 66,24" fill="#c0392b"/>
+    <rect x="44" y="0" width="8" height="14" fill="#7d2a20"/>
+    <rect x="12" y="32" width="14" height="12" fill="#4ea8de"/>
+    <rect x="36" y="38" width="12" height="24" fill="#6b4226"/>
+  </g>
+
+  <!-- Trees -->
+  <g>
+    <rect x="137" y="270" width="6" height="18" fill="#6b4226"/>
+    <polygon points="140,228 122,274 158,274" fill="#1f5f3f"/>
+    <rect x="169" y="262" width="7" height="22" fill="#6b4226"/>
+    <polygon points="172,212 150,266 194,266" fill="#2d6a4f"/>
+    <rect x="199" y="276" width="5" height="16" fill="#6b4226"/>
+    <circle cx="201" cy="266" r="14" fill="#52b788"/>
+  </g>
+
+  <!-- Windmill -->
+  <g transform="translate(262 238)">
+    <polygon points="-10,58 10,58 6,0 -6,0" fill="#ece4d4"/>
+    <rect x="-3" y="40" width="6" height="18" fill="#6b4226"/>
+    <g fill="#8d99ae">
+      <rect x="-2" y="-34" width="4" height="34"/>
+      <rect x="-2" y="0" width="4" height="30" transform="rotate(90)"/>
+      <rect x="-2" y="0" width="4" height="34"/>
+      <rect x="-2" y="0" width="4" height="30" transform="rotate(-90)"/>
+    </g>
+    <circle cx="0" cy="0" r="4" fill="#2b2d42"/>
+  </g>
+
+  <!-- Lake -->
+  <path d="M0 336 Q200 318 400 334 L400 400 L0 400Z" fill="url(#lake)"/>
+
+  <!-- Sun reflection -->
+  <g stroke="#ffd07a" stroke-width="3" stroke-linecap="round" opacity="0.75">
+    <line x1="312" y1="346" x2="358" y2="346"/>
+    <line x1="320" y1="356" x2="350" y2="356"/>
+  </g>
+
+  <!-- Grassy shore with flowers (bottom-left) -->
+  <path d="M0 326 Q70 330 104 356 Q122 378 92 400 L0 400Z" fill="#74c69d"/>
+  <g>
+    <circle cx="22" cy="352" r="5" fill="#ff6b9a"/>
+    <circle cx="48" cy="370" r="5" fill="#ffd166"/>
+    <circle cx="30" cy="386" r="5" fill="#9b5de5"/>
+    <circle cx="70" cy="358" r="5" fill="#ef476f"/>
+    <circle cx="66" cy="388" r="4" fill="#ffffff"/>
+    <circle cx="12" cy="374" r="4" fill="#f8961e"/>
+  </g>
+
+  <!-- Sailboat -->
+  <g transform="translate(190 348)">
+    <path d="M-30 20 L30 20 L20 34 L-20 34Z" fill="#8b3a2b"/>
+    <line x1="0" y1="-30" x2="0" y2="20" stroke="#2b2d42" stroke-width="2.5"/>
+    <polygon points="3,-28 3,16 30,16" fill="#fefae0"/>
+    <polygon points="-3,-20 -3,16 -24,16" fill="#e76f51"/>
+    <path d="M-36 40 q9 -5 18 0 q9 -5 18 0 q9 -5 18 0 q9 -5 18 0" fill="none" stroke="#a9d6e5" stroke-width="2"/>
+  </g>
+
+  <!-- Rocks and reeds (bottom-right) -->
+  <g>
+    <ellipse cx="352" cy="390" rx="30" ry="14" fill="#6c757d"/>
+    <ellipse cx="380" cy="384" rx="18" ry="11" fill="#868e96"/>
+    <g stroke="#2d6a4f" stroke-width="3" stroke-linecap="round">
+      <line x1="322" y1="392" x2="318" y2="370"/>
+      <line x1="328" y1="392" x2="328" y2="366"/>
+      <line x1="334" y1="392" x2="338" y2="372"/>
+    </g>
+    <ellipse cx="328" cy="366" rx="3" ry="6" fill="#7f4f24"/>
+  </g>
+</svg>

@@ -1,0 +1,14 @@
+@use 'tokens' as *;
+
+.puzzle-board {
+  display: grid;
+  gap: $board-gap;
+  width: 100%;
+  max-width: $board-max-size;
+  aspect-ratio: 1 / 1;
+  margin-inline: auto;
+  padding: $board-gap;
+  border-radius: $radius-md;
+  background: $color-board-bg;
+  box-shadow: $shadow-md;
+}

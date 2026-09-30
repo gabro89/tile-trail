@@ -1,0 +1,7 @@
+@use 'tokens' as *;
+
+.puzzle-game {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+}
