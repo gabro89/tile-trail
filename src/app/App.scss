@@ -1,0 +1,29 @@
+@use 'tokens' as *;
+
+.app {
+  width: 100%;
+  max-width: $content-max-width;
+  margin-inline: auto;
+  padding: $space-5 $space-4 $space-6;
+  display: flex;
+  flex-direction: column;
+  gap: $space-5;
+}
+
+.app__header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.app__title {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+  letter-spacing: -0.02em;
+  color: $color-primary;
+}
+
+.app__intro {
+  color: $color-text-muted;
+}

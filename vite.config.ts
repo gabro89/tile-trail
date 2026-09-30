@@ -1,0 +1,16 @@
+import { fileURLToPath } from 'node:url';
+import react from '@vitejs/plugin-react';
+import { defineConfig } from 'vite';
+
+// https://vite.dev/config/
+export default defineConfig({
+  plugins: [react()],
+  css: {
+    preprocessorOptions: {
+      scss: {
+        // Lets any stylesheet use `@use 'tokens' as *;` without long relative paths.
+        loadPaths: [fileURLToPath(new URL('./src/styles', import.meta.url))],
+      },
+    },
+  },
+});
