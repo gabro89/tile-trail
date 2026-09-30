@@ -1,0 +1,145 @@
+import type {
+  Board,
+  Cell,
+  CellIndex,
+  GridPosition,
+  RandomSource,
+  TileId,
+} from '../models/puzzle.types.ts';
+
+const EMPTY_CELL: Cell = { kind: 'empty' };
+
+/** Row-major board with tiles 1..n-1 in order and the empty cell at the bottom-right. */
+export function createSolvedBoard(gridSize: number): Board {
+  const cellCount = gridSize * gridSize;
+
+  return Array.from({ length: cellCount }, (_, index): Cell =>
+    index === cellCount - 1 ? EMPTY_CELL : { kind: 'tile', id: index + 1 },
+  );
+}
+
+export function getGridPosition(index: CellIndex, gridSize: number): GridPosition {
+  return { row: Math.floor(index / gridSize), col: index % gridSize };
+}
+
+/** The cell index where a tile belongs when the puzzle is solved. */
+export function getSolvedIndex(tileId: TileId): CellIndex {
+  return tileId - 1;
+}
+
+export function findEmptyIndex(board: Board): CellIndex {
+  const index = board.findIndex((cell) => cell.kind === 'empty');
+
+  if (index === -1) {
+    throw new Error('Invalid board: no empty cell.');
+  }
+
+  return index;
+}
+
+/**
+ * True when two cells share an edge. Comparing rows and columns (rather than
+ * index differences) rules out diagonal moves and wrapping across row ends.
+ */
+export function areCellsAdjacent(a: CellIndex, b: CellIndex, gridSize: number): boolean {
+  const first = getGridPosition(a, gridSize);
+  const second = getGridPosition(b, gridSize);
+
+  return Math.abs(first.row - second.row) + Math.abs(first.col - second.col) === 1;
+}
+
+/** Indices of the cells sharing an edge with `index`. */
+export function getNeighborIndices(index: CellIndex, gridSize: number): ReadonlyArray<CellIndex> {
+  const { row, col } = getGridPosition(index, gridSize);
+  const neighbors: CellIndex[] = [];
+
+  if (row > 0) neighbors.push(index - gridSize);
+  if (row < gridSize - 1) neighbors.push(index + gridSize);
+  if (col > 0) neighbors.push(index - 1);
+  if (col < gridSize - 1) neighbors.push(index + 1);
+
+  return neighbors;
+}
+
+export function canMoveTile(board: Board, index: CellIndex, gridSize: number): boolean {
+  const cell = board[index];
+
+  return cell?.kind === 'tile' && areCellsAdjacent(index, findEmptyIndex(board), gridSize);
+}
+
+/**
+ * Slides the tile at `index` into the empty cell. Returns a new board, or
+ * `null` when the move is illegal. The input board is never mutated.
+ */
+export function moveTile(board: Board, index: CellIndex, gridSize: number): Board | null {
+  const tile = board[index];
+  const emptyIndex = findEmptyIndex(board);
+
+  if (tile?.kind !== 'tile' || !areCellsAdjacent(index, emptyIndex, gridSize)) {
+    return null;
+  }
+
+  return board.map((cell, cellIndex) => {
+    if (cellIndex === index) return EMPTY_CELL;
+    if (cellIndex === emptyIndex) return tile;
+    return cell;
+  });
+}
+
+export function isSolved(board: Board): boolean {
+  const lastIndex = board.length - 1;
+
+  return board.every((cell, index) =>
+    index === lastIndex
+      ? cell.kind === 'empty'
+      : cell.kind === 'tile' && getSolvedIndex(cell.id) === index,
+  );
+}
+
+function pickRandom<T>(items: ReadonlyArray<T>, random: RandomSource): T {
+  const item = items[Math.floor(random() * items.length)];
+
+  if (item === undefined) {
+    throw new Error('Cannot pick from an empty list.');
+  }
+
+  return item;
+}
+
+/**
+ * Creates a shuffled board by walking the empty cell through random legal
+ * moves, starting from the solved board. Every step is a legal move, so the
+ * result is always solvable. The walk avoids undoing the previous step when
+ * another move exists, and keeps going until the board is not solved.
+ *
+ * This does not produce a uniform distribution over solvable boards and does
+ * not guarantee any particular difficulty.
+ */
+export function createShuffledBoard(
+  gridSize: number,
+  moveCount: number,
+  random: RandomSource = Math.random,
+): Board {
+  let board = createSolvedBoard(gridSize);
+  let emptyIndex = findEmptyIndex(board);
+  let previousEmptyIndex: CellIndex | null = null;
+  let movesMade = 0;
+
+  while (movesMade < moveCount || isSolved(board)) {
+    const neighbors = getNeighborIndices(emptyIndex, gridSize);
+    const forward = neighbors.filter((neighbor) => neighbor !== previousEmptyIndex);
+    const tileIndex = pickRandom(forward.length > 0 ? forward : neighbors, random);
+    const nextBoard = moveTile(board, tileIndex, gridSize);
+
+    if (!nextBoard) {
+      throw new Error('Shuffle produced an illegal move.');
+    }
+
+    board = nextBoard;
+    previousEmptyIndex = emptyIndex;
+    emptyIndex = tileIndex;
+    movesMade += 1;
+  }
+
+  return board;
+}
