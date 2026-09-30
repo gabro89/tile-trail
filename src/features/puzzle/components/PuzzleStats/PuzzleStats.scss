@@ -1,6 +1,8 @@
 @use 'tokens' as *;
 
 .puzzle-stats {
+  flex: 1 1 auto;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   gap: $space-2;
@@ -17,12 +19,9 @@
   font-variant-numeric: tabular-nums;
 }
 
-.puzzle-stats__message:empty {
-  display: none;
-}
-
 .puzzle-stats__message {
   padding: $space-2 $space-3;
+  border-left: 4px solid $color-success;
   border-radius: $radius-sm;
   background: $color-success-bg;
   color: $color-success;

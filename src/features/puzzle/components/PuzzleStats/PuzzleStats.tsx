@@ -16,10 +16,18 @@ export function PuzzleStats({ moveCount, status }: PuzzleStatsProps) {
       <p className="puzzle-stats__moves">
         Moves <span className="puzzle-stats__count">{moveCount}</span>
       </p>
-      {/* The live region stays mounted so screen readers announce only the completion text. */}
-      <p className="puzzle-stats__message" role="status">
-        {status === 'solved' ? `Solved! You rebuilt the picture in ${formatMoves(moveCount)}.` : ''}
-      </p>
+      {/*
+        The live region stays mounted (and in the accessibility tree) for the
+        whole game, so only the completion text is announced. The move counter
+        is deliberately outside it to avoid announcing every move.
+      */}
+      <div role="status">
+        {status === 'solved' && (
+          <p className="puzzle-stats__message">
+            Solved! You rebuilt the picture in {formatMoves(moveCount)}.
+          </p>
+        )}
+      </div>
     </div>
   );
 }

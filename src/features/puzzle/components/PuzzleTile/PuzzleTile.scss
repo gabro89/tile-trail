@@ -13,19 +13,56 @@
   background-repeat: no-repeat;
   box-shadow: $shadow-sm;
   cursor: default;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    transform $transition-fast,
+    filter $transition-fast;
 
   &:disabled {
     // Non-movable tiles keep their full picture; disabled only blocks input.
     opacity: 1;
   }
+
+  // Draw the ring inside the tile so neighbouring tiles cannot cover it, with a
+  // light inner line so it stays visible on dark and light picture areas.
+  &:focus-visible {
+    z-index: 1;
+    outline: $focus-ring-width solid $color-focus;
+    outline-offset: -$focus-ring-width;
+    box-shadow: inset 0 0 0 ($focus-ring-width + 2px) $color-focus-inner;
+  }
 }
 
 .puzzle-tile--movable {
   cursor: pointer;
+
+  @media (hover: hover) {
+    &:hover {
+      filter: brightness(1.12);
+      transform: scale(0.97);
+    }
+  }
+
+  &:active {
+    filter: brightness(0.92);
+    transform: scale(0.94);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &:hover,
+    &:active {
+      transform: none;
+    }
+  }
 }
 
 .puzzle-tile--empty {
   background: $color-empty-cell;
+  box-shadow: none;
+}
+
+.puzzle-tile--revealed {
   box-shadow: none;
 }
 
@@ -36,14 +73,11 @@
   min-width: 1.4em;
   padding: 0 $space-1;
   border-radius: $radius-sm;
-  background: rgb(0 0 0 / 55%);
-  color: #fff;
-  font-size: 0.7rem;
+  background: $color-badge-bg;
+  color: $color-badge-text;
+  font-size: $font-size-xs;
   font-weight: $font-weight-semibold;
   line-height: 1.4;
   text-align: center;
-}
-
-.puzzle-tile--revealed {
-  box-shadow: none;
+  pointer-events: none;
 }
